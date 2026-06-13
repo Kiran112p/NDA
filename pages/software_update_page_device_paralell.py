@@ -1,14 +1,15 @@
 import os
 import sys
 import pytest
+import  time
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import Select
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 # Ensure the NDA root directory is on sys.path so pages.login_page can be imported.
-sys.path.append(os.path.dirname(os.path.dirname(__file__)))
-
+#sys.path.append(os.path.dirname(os.path.dirname(__file__)))
+sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..', '..', 'NDA'))
 from login_page import LoginPage
 
 class SoftwareUpdatePageDeviceParallel:
@@ -24,13 +25,28 @@ class SoftwareUpdatePageDeviceParallel:
 
     def add_software_update(self):
         os_path=r"D:\resume\overview1.txt"
-        os_upload=WebDriverWait(self.driver,5).until(EC.visibility_of_element_located((By.XPATH,'//*[@class="upload-zone"]//input[@type="file"]')))
-        #os_upload.click()
-        os_upload.send_keys(os_path)
+        upload_zone = self.wait.until(
+            EC.presence_of_element_located((By.XPATH, '//input[@type="file"]'))
+        )
+       
+        upload_zone.send_keys(os.path.abspath(os_path))
+        print(f"File uploaded: {os_path}")
 
-        WebDriverWait(self.driver,5).until(EC.visibility_of_element_located((By.ID,'nextStep1')))
         
-        self.driver.find_element(By.ID,"selectAllDevices").click()
+        
+        # Wait for the file to appear in the UI
+        self.wait.until(EC.presence_of_element_located((By.XPATH, '//strong[contains(text(), "overview1.txt")]')))
+        print("File confirmed in upload area")
+
+        WebDriverWait(self.driver,5).until(
+            EC.element_to_be_clickable((By.ID,'nextStep1'))
+        ).click()
+
+        time.sleep(5)
+        
+        WebDriverWait(self.driver,5).until(
+            EC.element_to_be_clickable((By.ID,"selectAllDevices"))
+        ).click()
 
         install_button = Select(self.driver.find_element(By.ID,"installationType"))
         install_button.select_by_value("Parallel")
