@@ -10,7 +10,7 @@ from selenium.webdriver.support import expected_conditions as EC
 sys.path.append(os.path.dirname(os.path.dirname(__file__)))
 
 
-from NDA.pages.device_management_ssh_private import DeviceManagementPage
+from pages.device_management_ssh_private import DeviceManagementPage
 
 
 
