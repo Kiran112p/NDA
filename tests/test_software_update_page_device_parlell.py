@@ -37,11 +37,12 @@ class TestSoftwarePage:
 
         rn_s=wait.until(EC.presence_of_element_located((run_status))).text
         assert rn_s == "Success", "run status was not matchin something else"
+
         rn_t=wait.until(EC.presence_of_element_located((run_status))).text
         print("run time was :: ", rn_t)
-                 
-        time.sleep(5)
-        driver.quit()
 
+        driver.quit()
+    print("software update page sucsusfully test complete")
+    
 
 
