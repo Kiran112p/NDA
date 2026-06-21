@@ -1,0 +1,36 @@
+Test case: Add SSH private device and verify it appears
+
+Preconditions:
+     Browser is installed and working
+     Application URL is accessible
+     Valid login credentials exist
+     User is not already blocked by prior test data
+Summary:
+        The user enters the password Kiran@112, scrolls down if necessary, selects IOS XR as the Device Type and 7.0 as the Device Version, clears the Host Name field and enters Private, then selects SSH as the Protocol. After clicking the Add/Save button and accepting the browser alert, the login is successful and the Dashboard is displayed. The Device Management page loads correctly, and a new device record is added showing ROUTER_NCS_540 as the device name, 192.168.1.100 as the IP address, Kiran112 as the username, and IOS XR as the device type.
+
+Steps:
+     Open the application login page
+     Enter valid username and password
+     Submit login
+     Confirm the dashboard is displayed
+     Click the server icon (fa-solid fa-server) to open Device Management
+     In the Device Management form: 
+     Enter ROUTER_NCS_540 for Device Name
+     Enter 192.168.1.100 for Device IP
+     Enter Kiran112 for Username
+     Enter Kiran@112 for Password
+     Scroll down if needed
+     Select IOS XR for Device Type
+     Select 7.0 for Device Version
+     Clear and enter Private for Host Name
+     Select SSH for Protocol
+     Click the add/save button
+     Accept the browser alert
+Expected results:
+     Login succeeds and dashboard is shown
+     Device Management page loads
+     After adding, a device row appears with:
+     Name: ROUTER_NCS_540
+     IP: 192.168.1.100
+     Username: Kiran112
+     Device Type: IOS XR

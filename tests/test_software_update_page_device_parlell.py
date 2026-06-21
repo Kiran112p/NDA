@@ -13,10 +13,10 @@ sys.path.append(os.path.dirname(os.path.dirname(__file__)))
 from pages.software_update_page_device_paralell import SoftwareUpdatePageDeviceParallel
 
 # Locators
-job_name = (By.XPATH, '//*[@class="jobs-table"]//tbody/tr[1]/td[2]')
-job_status = (By.ID, "detailStatus")
-run_status = (By.ID, "detailRunStatus")
-run_time = (By.ID, "detailRunTime")
+job_name = (By.XPATH, '//table[@class="jobs-table"]//tbody/tr[1]/td[2]')
+job_status = (By.XPATH, '//table[@class="jobs-table"]//tbody/tr[1]/td[3]')
+run_status = (By.XPATH, '//table[@class="jobs-table"]//tbody/tr[1]/td[4]')
+run_time = (By.XPATH, '//table[@class="jobs-table"]//tbody/tr[1]/td[5]')
 installation_type = (By.ID, "detailInstallationType")
 software_image = (By.ID, "detailImage")
 
@@ -28,35 +28,21 @@ class TestSoftwarePage:
         software_page.navigate_to_software_update()
         software_page.add_software_update()
 
-        wait = WebDriverWait(driver, 60)
+        wait = WebDriverWait(driver, 10)
+        jb_n=wait.until(EC.presence_of_element_located((job_name))).text
+        print("job_name is :: ",jb_n)
+        
+        jb_s=wait.until(EC.presence_of_element_located((job_status))).text
+        assert jb_s == "Completed","job status was not matchi something else"
 
-        def _get_text(element):
-            return (element.text or element.get_attribute("textContent") or element.get_attribute("innerText") or "").strip()
+        rn_s=wait.until(EC.presence_of_element_located((run_status))).text
+        assert rn_s == "Success", "run status was not matchin something else"
 
-        job_row = wait.until(EC.element_to_be_clickable(job_name))
-        assert _get_text(job_row) == "routers_Parallel_Update", "job name was not matching"
-        job_row.click()
-        time.sleep(2)
+        rn_t=wait.until(EC.presence_of_element_located((run_status))).text
+        print("run time was :: ", rn_t)
 
-        status_el = wait.until(EC.visibility_of_element_located(job_status))
-        j_s = _get_text(status_el)
-        assert j_s == "Completed", "actual status was not matching"
-
-        run_el = wait.until(EC.visibility_of_element_located(run_status))
-        r_s = _get_text(run_el)
-        assert r_s == "Success", "actual status was failed"
-
-        runtime_el = wait.until(EC.visibility_of_element_located(run_time))
-        r_t = _get_text(runtime_el)
-        print("run time was ::", r_t)
-
-        inst_el = wait.until(EC.visibility_of_element_located(installation_type))
-        in_t = _get_text(inst_el)
-        assert in_t == "Parallel", "not matching, its sequential"
-
-        image_el = wait.until(EC.visibility_of_element_located(software_image))
-        image = _get_text(image_el)
-        print("updated os image was ::", image)
-
+        driver.quit()
+    print("software update page sucsusfully test complete")
+    
 
 

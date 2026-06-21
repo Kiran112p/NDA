@@ -1,0 +1,22 @@
+Test name
+Validate login and dashboard title
+
+Preconditions:
+	Browser installed and working
+	Application URL is accessible
+	Valid login credentials are available
+
+Summary:
+    	The user opens the browser, navigates to the login page, enters the username Kiran112 and password Kiran@	112,and clicks the login button. After the dashboard loads, the user is logged in successfully, and the 	browser title 	is displayed as NDA — Dashboard.
+
+Steps:
+	Open the browser
+	Navigate to the login page
+	Enter username: Kiran112
+	Enter password: Kiran@112
+	Click the login button
+	Wait for the dashboard to load
+
+Expected Result:
+	User is logged in successfully
+	Browser title becomes: NETWORK_MANAGE — Dashboard
