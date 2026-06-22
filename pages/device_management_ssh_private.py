@@ -8,7 +8,7 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 # Ensure the NDA root directory is on sys.path so pages.login_page can be imported.
 sys.path.append(os.path.dirname(os.path.dirname(__file__)))
-
+import time
 from pages.login_page import LoginPage
 
 
@@ -19,7 +19,7 @@ class DeviceManagementPage:
         self.wait = WebDriverWait(driver, 10)
 
     def navigate_to_device_management(self):    
-        server_icon = WebDriverWait(self.driver, 10).until(EC.element_to_be_clickable((By.XPATH, '//*[@class="fa-solid fa-server"]')))
+        server_icon = self.wait.until(EC.element_to_be_clickable((By.XPATH, '//*[@href="#device-management"]')))
         server_icon.click()
     def add_device(self):
         self.driver.find_element(By.ID,"deviceName").send_keys("ROUTER_NCS_540")

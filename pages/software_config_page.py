@@ -21,7 +21,8 @@ next_id=(By.ID,'cfgNext')
 device_n_id=(By.ID,'cfgDeviceSelect')
 cmd_line_id=(By.ID,'cfgScript')
 save_config=(By.ID,'cfgSave')
-
+pop_up_xpath=(By.XPATH, '//*[@class="version-modal-box config-push-success-box"]')
+pop_up_accept=(By.ID,"configPushSuccessOk")
 
 value="ROUTER_NCS_540"
 placeholder=("hostname {{public_host}}\
@@ -36,7 +37,7 @@ inst_device =DeviceManagementPage(inst_login.driver)
 inst_device.navigate_to_device_management()
 inst_device.add_device()
 
-time.sleep(2)
+time.sleep(3)
 
 class SoftwareConfig:
     def __init__(self, driver):
@@ -75,11 +76,17 @@ class SoftwareConfig:
         self.driver.find_element(*next_id).click()
 
         self.driver.find_element(*save_config).click()
+        
+        self.wait.until(
+            EC.visibility_of_element_located(pop_up_xpath))
+        self.driver.find_element(*pop_up_accept).click()
 
+        self.driver.save_screenshot(r"D:\NDA\reports\_after_config_job.png")
+        
+        time.sleep(5)
         print("device config was sucsusfull as hostname public")
         
 
 inst_soft=SoftwareConfig(inst_login.driver)
 inst_soft.navigate_to_soft_config()
 inst_soft.device_config()
-
