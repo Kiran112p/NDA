@@ -83,8 +83,8 @@ class SoftwareConfig:
 
         self.driver.save_screenshot(r"D:\NDA\reports\_after_config_job.png")
         
-        time.sleep(5)
-        print("device config was sucsusfull as hostname public")
+        time.sleep(500)
+        print("Device config was sucsusfull as hostname public")
         
 
 inst_soft=SoftwareConfig(inst_login.driver)

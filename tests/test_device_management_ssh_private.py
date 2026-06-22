@@ -13,7 +13,7 @@ sys.path.append(os.path.dirname(os.path.dirname(__file__)))
 from pages.device_management_ssh_private import DeviceManagementPage
 
 
-
+@pytest.mark.regression
 class TestDeviceManagement():
     def test_add_device(self, driver):
         device_page = DeviceManagementPage(driver)

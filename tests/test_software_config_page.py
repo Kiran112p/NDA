@@ -13,10 +13,17 @@ sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..', '..', 'NDA'))
 
 from pages.software_config_page import SoftwareConfig
 
+#Locaters
+suc_txt=(By.XPATH,'//*[@id="configJobDetailsMessage"]')
+d_name=(By.XPATH,'//*[@id="configJobDetailsDevice"]')
+status=(By.XPATH,'//*[@id="configJobDetailsStatus"]')
+
+
 time.sleep(20)
+@pytest.mark.regression
 class TestSoftwareConfig:
     def test_config_page(self, driver):
         self.driver = driver
-        self.driver.save_screenshot(r"D:\NDA\reports\_after_config_job.png")
-        # time.sleep(0.1)
+        
+        
 

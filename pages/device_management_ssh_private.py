@@ -12,7 +12,7 @@ import time
 from pages.login_page import LoginPage
 
 
-
+time.sleep(5)
 class DeviceManagementPage:
     def __init__(self, driver):
         self.driver = driver
