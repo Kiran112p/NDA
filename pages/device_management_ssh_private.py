@@ -8,44 +8,63 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 # Ensure the NDA root directory is on sys.path so pages.login_page can be imported.
 sys.path.append(os.path.dirname(os.path.dirname(__file__)))
-
+import time
 from pages.login_page import LoginPage
+from helpers.locaters import *
+from helpers.variables import *
 
 
-
+time.sleep(5)
 class DeviceManagementPage:
     def __init__(self, driver):
         self.driver = driver
         self.wait = WebDriverWait(driver, 10)
 
-    def navigate_to_device_management(self):    
-        server_icon = WebDriverWait(self.driver, 10).until(EC.element_to_be_clickable((By.XPATH, '//*[@class="fa-solid fa-server"]')))
-        server_icon.click()
+    def _click(self, locator, delay=0.10):
+        element = self.wait.until(EC.element_to_be_clickable(locator))
+        element.click()
+        time.sleep(delay)
+
+    def _type(self, locator, value, delay=0.6):
+        element = self.wait.until(EC.visibility_of_element_located(locator))
+        element.clear()
+        element.send_keys(value)
+        time.sleep(delay)
+
+    def navigate_to_device_management(self):
+        self._click((By.XPATH, '//*[@href="#device-management"]'))
+
     def add_device(self):
-        self.driver.find_element(By.ID,"deviceName").send_keys("ROUTER_NCS_540")
-        self.driver.find_element(By.ID,"deviceIp").send_keys("192.168.1.100")
-        self.driver.find_element(By.ID,"deviceUname").send_keys("Kiran112")
-        self.driver.find_element(By.ID,"devicePassword").send_keys("Kiran@112")
-        
+        self._type(d_name_id, d_name)
+        self._type(d_ip_id, d_ip)
+        self._type(d_uname_id, d_uname)
+        self._type(d_pwd_id, d_pwd)
+
         self.driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
+        time.sleep(0.5)
 
-        device_type= Select(self.driver.find_element(By.ID,"deviceType"))
-        device_type.select_by_visible_text("IOS XR")
-        
-        device_version=Select(self.driver.find_element(By.ID,"deviceVersion"))
-        device_version.select_by_visible_text("7.0")
+        device_type = Select(self.wait.until(EC.element_to_be_clickable(d_type_id)))
+        device_type.select_by_visible_text(d_type)
+        time.sleep(0.5)
 
-        host_name=self.driver.find_element(By.ID,"deviceHostname")
+        device_version = Select(self.wait.until(EC.element_to_be_clickable(d_version_id)))
+        device_version.select_by_visible_text(d_version)
+        time.sleep(0.5)
+
+        host_name = self.wait.until(EC.visibility_of_element_located(d_host_id))
         host_name.clear()
-        host_name.send_keys("Private")
+        host_name.send_keys(d_host)
+        time.sleep(0.3)
 
-        protocol=Select(self.driver.find_element(By.ID,"deviceProtocol"))
-        protocol.select_by_visible_text("SSH")
+        protocol = Select(self.wait.until(EC.element_to_be_clickable(d_proto_id)))
+        protocol.select_by_visible_text(d_protocol)
+        time.sleep(0.5)
 
-        self.driver.find_element(By.XPATH,'(//button[@class="btn-primary"])[4]').click()
+        self._click(save_button)
 
         alert = WebDriverWait(self.driver, 10).until(EC.alert_is_present())
         alert.accept()
+        time.sleep(0.5)
 
         print("Device added successfully")
 

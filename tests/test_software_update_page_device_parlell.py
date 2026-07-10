@@ -12,7 +12,7 @@ sys.path.append(os.path.dirname(os.path.dirname(__file__)))
 
 from pages.software_update_page_device_paralell import SoftwareUpdatePageDeviceParallel
 
-# Locators
+#test software update  Locators
 job_name = (By.XPATH, '//table[@class="jobs-table"]//tbody/tr[1]/td[2]')
 job_status = (By.XPATH, '//table[@class="jobs-table"]//tbody/tr[1]/td[3]')
 run_status = (By.XPATH, '//table[@class="jobs-table"]//tbody/tr[1]/td[4]')
@@ -20,6 +20,7 @@ run_time = (By.XPATH, '//table[@class="jobs-table"]//tbody/tr[1]/td[5]')
 installation_type = (By.ID, "detailInstallationType")
 software_image = (By.ID, "detailImage")
 
+@pytest.mark.regression
 class TestSoftwarePage:
     def test_software_update_page(self, driver):
         """this func will verify after creating a job"""
