@@ -1,5 +1,5 @@
 Title:
-	Verify successful creation and saving of a software configuration on the Software Config page
+	Verify successful modification of the device hostname from Private to Public on the Software Config page
 
 Summary:
 	This test validates that a user can navigate to the Software Config section, enter configuration details, 	select a device, add a command script, save the configuration, and confirm the success popup.
@@ -8,7 +8,7 @@ Steps:
 
 Open the application and log in using valid credentials.
 Navigate to the Device Management section.
-Add a new device if required.
+Add a new device it is required.
 Click the Software Config tab.
 Enter public_host in the Config Name field.
 Enter This config changing the device host like private host to public host in the Config Description field.
