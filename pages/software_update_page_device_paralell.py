@@ -11,16 +11,10 @@ from selenium.webdriver.support import expected_conditions as EC
 sys.path.append(os.path.dirname(os.path.dirname(__file__)))
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..', '..', 'NDA'))
 from pages.login_page import LoginPage
+from helpers.locaters import *
+from helpers.variables import *
 
-#Locaters
 
-job_name="routers_Parallel_Update"
-
-file_upload='//input[@type="file"]'
-os_path=r"D:\resume\overview1.txt"
-device_selection="selectAllDevices"
-instalation_type="installationType"
-screen_path="D:\\NDA\\reports\\Screenshots\\software_update_parallel.png"
 
 class SoftwareUpdatePageDeviceParallel:
     def __init__(self, driver):

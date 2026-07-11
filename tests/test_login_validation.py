@@ -11,7 +11,7 @@ from pages.login_page import LoginPage
 
 
 @pytest.fixture(scope="function")
-# @pytest.mark.regression
+#@pytest.mark.regression
 def driver():
     driver = webdriver.Chrome()
     driver.maximize_window()
