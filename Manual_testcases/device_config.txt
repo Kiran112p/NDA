@@ -1,0 +1,34 @@
+Title:
+	device_config_module
+
+Description:
+	This regression test validates the complete workflow of adding an SSH Private Device, creating and pushing a device configuration, verifying the configuration job status as Completed and Success, confirming the configuration is saved successfully, and deleting the created job from the Config Jobs module.
+
+Steps:
+
+Login to the Network Management application.
+Navigate to the Device Management page.
+Add an SSH Private Device.
+Verify the device is displayed in the Registered Devices table.
+Navigate to the Device Configuration page.
+Enter Config Name as Public_hostname.
+Enter Description "This config changing the device host like private host to public host".
+Click Next.
+Select the newly added device from the Device dropdown.
+Click Next.
+Enter the configuration command:
+"("hostname {{public_host}}\
+ ip domain-name {{domain}}")"
+Click Next.
+Review the configuration details.
+Click Push Config.
+Verify the success popup and click OK.
+Navigate to the Config Jobs tab.
+Verify the job status is Completed.
+Verify the run status is Success.
+Verify the configuration is available in Saved Configurations.
+Delete the created configuration job.
+
+Expected Result:
+
+Configuration is pushed successfully, the job status shows Completed and Success, the configuration is saved successfully, and the job is deleted successfully.

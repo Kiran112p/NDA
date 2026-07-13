@@ -1,0 +1,148 @@
+=========================================================
+DEFECT REPORT
+=========================================================
+
+Defect ID      : BUG_DC_001
+Project        : Device Manage
+Feature        : Config Change
+Defect Type    : Functional Defect
+
+Title:
+Config Push Operation Fails with "config string is not valid"
+Error for Valid Hostname Configuration
+
+=========================================================
+DESCRIPTION
+=========================================================
+
+When attempting to push a valid hostname configuration to a
+registered device, the system displays a "Config Push Failed"
+popup and returns the error message:
+
+"config string is not valid"
+
+The configuration job is created successfully; however, the
+job status is marked as Failed/Failed instead of completing
+successfully.
+
+=========================================================
+PRECONDITIONS
+=========================================================
+
+1. User is logged into the application.
+2. SSH Private Device is added successfully.
+3. Device is available in the Device dropdown.
+4. User has access to Device Configuration module.
+
+=========================================================
+TEST DATA
+=========================================================
+
+Config Name      : hostname_public
+Description      : Regression Testing
+Target Device    : ROUTER_NCS_1112
+
+Sample Configs:
+
+hostname=router-core-01
+domain=example.com
+
+Config Commands:
+
+hostname {{public_host}}
+ip domain-name {{domain}}
+
+=========================================================
+STEPS TO REPRODUCE
+=========================================================
+
+1. Login to the Network Management application.
+2. Navigate to Device Management.
+3. Add an SSH Private Device.
+4. Verify the device is available in Registered Devices.
+5. Navigate to Device Configuration.
+6. Enter Config Name.
+7. Enter Description.
+8. Select the target device.
+9. Enter the configuration command:
+
+   hostname {{public_host}}
+   ip domain-name {{domain}}
+
+10. Click Next.
+11. Review configuration details.
+12. Click Push Config.
+
+=========================================================
+ACTUAL RESULT
+=========================================================
+
+Config Push Failed popup is displayed.
+
+Error Message:
+"config string is not valid"
+
+Job Status:
+Failed / Failed
+
+Configuration is not pushed successfully.
+
+=========================================================
+EXPECTED RESULT
+=========================================================
+
+Configuration should be pushed successfully.
+
+Success popup should be displayed.
+
+Job Status:
+Completed
+
+Run Status:
+Success
+
+Configuration should be applied successfully
+on the target device.
+
+=========================================================
+JOB DETAILS
+=========================================================
+
+Job Name      : Push_config_hostname_public
+Device        : ROUTER_NCS_1112
+Status        : Failed / Failed
+Failure Reason: config string is not valid
+
+=========================================================
+DEFECT DETAILS
+=========================================================
+
+Severity      : Moderate
+Priority      : P2 - High
+Status        : New - Defect Reported
+Affects Version : 7.0
+Fix Version     : 7.0
+Environment     : All
+Defect Found In : Regression
+
+=========================================================
+BUSINESS IMPACT
+=========================================================
+
+Users are unable to push valid configuration commands to
+network devices. This impacts the core functionality of the
+Device Configuration module and prevents successful network
+device configuration deployment.
+
+=========================================================
+ATTACHMENTS
+=========================================================
+
+NDA/defects/device_config_report.png
+=========================================================
+REPORTED BY
+=========================================================
+
+Reported By : Kiran
+Reported On : 11-Jul-2026
+
