@@ -1,0 +1,127 @@
+=========================================================
+DEFECT REPORT
+=========================================================
+
+Defect ID      : DEF-1004
+Project        : Control Device
+Feature        : Software Update
+
+Title:
+Software Configuration Job Fails When Device Has Insufficient Disk Space
+
+=========================================================
+DESCRIPTION
+=========================================================
+
+When executing a software configuration/installation job on a
+target device with insufficient available disk space, the job
+fails after execution begins and displays the status as Failed.
+
+The failure reason displayed is:
+
+"Insufficient disk space on device"
+
+The application allows the job to start without validating
+whether enough storage is available on the target device.
+
+As a result, the job runs for some time and eventually fails,
+causing unnecessary execution time and resource consumption.
+
+The system should validate the available disk space before
+starting the software installation process and notify the user
+if sufficient storage is not available.
+
+=========================================================
+PRECONDITIONS
+=========================================================
+
+1. User is logged into the application.
+2. Device is registered and reachable.
+3. Device has insufficient free disk space.
+4. Valid software image is available.
+5. User has permission to perform software updates.
+
+=========================================================
+TEST DATA
+=========================================================
+
+Target Device : Registered Network Device
+Software Image: Valid OS/Image File
+Installation Type : Sequential Installation
+
+=========================================================
+STEPS TO REPRODUCE
+=========================================================
+
+1. Login to the application.
+2. Navigate to Software Update module.
+3. Select a valid software image.
+4. Select the target device.
+5. Enter a job name.
+6. Select Sequential Installation.
+7.give to job name
+8.select run now
+9. Click Next.
+10. Start the software installation job.
+11. Monitor the job execution.
+12. Open Saved Jobs / Job Status page.
+
+=========================================================
+ACTUAL RESULT
+=========================================================
+
+- Software installation job starts successfully.
+- System does not validate available disk space.
+- Job executes for some time.
+- Job eventually fails.
+- Failure reason displayed:
+
+  "Insufficient disk space on device"
+
+=========================================================
+EXPECTED RESULT
+=========================================================
+
+- System should validate available disk space before
+  initiating software installation.
+- If storage is insufficient, the job should not start.
+- Appropriate warning/error message should be displayed.
+- User should be informed about required disk space.
+
+=========================================================
+DEFECT DETAILS
+=========================================================
+
+Severity        : Moderate
+Priority        : P2 - High
+Status          : New - Defect Reported
+Assignee        : John Smith
+Affects Version : 8.0
+Fix Version     : 8.0
+Environment     : All
+Defect Found In : Regression
+
+=========================================================
+BUSINESS IMPACT
+=========================================================
+
+The software installation process consumes time and system
+resources before ultimately failing. Users receive the error
+only after execution starts, resulting in inefficient
+operations and delayed software upgrades.
+
+=========================================================
+ATTACHMENTS
+=========================================================
+
+NDA/defects/software_update_reposrt.png
+
+D:\NDA\reports\software_update_page.html
+
+=========================================================
+REPORTED BY
+=========================================================
+
+Reported By : Kiran
+Reported Date : 11-Jul-2026
+
