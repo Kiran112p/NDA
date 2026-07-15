@@ -61,43 +61,11 @@ class TestSoftwareConfig:
         
         # Step 5: Validate Configuration Results
         print("\n=== Step 5: Validate Configuration Results ===")
-        self.validate_config_results()
+        soft_config.validate_config_results()
         
         print("\n=== Test Completed Successfully ===")
     
-    def validate_config_results(self):
-        """Validate that the configuration job was created and completed"""
-        print("Validating configuration results...")
-        
-        # Wait for jobs panel to load
-        jobs_panel = self.wait.until(
-            EC.presence_of_element_located((By.ID, "configPanelJobs"))
-        )
-        time.sleep(2)
-        
-        # Get job details
-        try:
-            job_rows = self.driver.find_elements(By.XPATH, '//*[@id="configPanelJobs"]//tbody//tr')
-            print(f"Found {len(job_rows)} configuration jobs")
-            
-            if len(job_rows) > 0:
-                # Get first job row
-                first_job_text = job_rows[0].text
-                print(f"Latest job details: {first_job_text}")
-                
-                # Verify job status
-                status_elements = job_rows[0].find_elements(By.XPATH, './/span[@class="status-badge success"]')
-                if status_elements:
-                    status = status_elements[0].text
-                    print(f"Job Status: {status}")
-                    assert status == 'Completed' or status.lower() in ['success', 'completed'], f"Expected 'Completed' status but got '{status}'"
-                
-                print("✓ Configuration validation passed")
-            else:
-                print("No configuration jobs found - this may be expected if async processing is ongoing")
-                
-        except Exception as e:
-            print(f"Configuration validation warning: {e}")
+    
 
 
 

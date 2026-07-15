@@ -21,3 +21,18 @@ desription="This config changing the device host like private host to public hos
 placeholder=("hostname {{public_host}}\
             ip domain-name {{domain}}")
 screen_path = r"D:\NDA\reports\_after_config_job.png"
+
+# Expected values for config job validation
+expected_config_job_status = "Completed"
+
+
+# software update page variables
+expected_job_status="Completed"
+expected_run_status="Success"
+#screenshot path for software update page
+screen_path="D:\\NDA\\reports\\Screenshots\\software_update_parallel.png"
+#os file path for software update page
+os_path=r"D:\resume\overview1.txt"
+
+##job name for software update page
+software_update_job_name="routers_Parallel_Update"
