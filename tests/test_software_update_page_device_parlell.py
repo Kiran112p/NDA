@@ -23,24 +23,14 @@ class TestSoftwarePage:
         """this func will verify after creating a job"""
         self.driver = driver
         software_page = SoftwareUpdatePageDeviceParallel(driver)
+        print("\n=== Step 1: Navigate to Software Update Page ===")
         software_page.navigate_to_software_update()
+
+        print("\n=== Step 2: Add Software Update ===")
         software_page.add_software_update()
-
-        wait = WebDriverWait(driver, 10)
-        jb_n=wait.until(EC.presence_of_element_located((job_name))).text
-        print("job_name is :: ",jb_n)
         
-        jb_s=wait.until(EC.presence_of_element_located((job_status))).text
-        assert jb_s == "Completed","job status was not matchi something else"
-
-        rn_s=wait.until(EC.presence_of_element_located((run_status))).text
-        assert rn_s == "Success", "run status was not matchin something else"
-
-        rn_t=wait.until(EC.presence_of_element_located((run_status))).text
-        print("run time was :: ", rn_t)
-
-        driver.quit()
-    print("software update page sucsusfully test complete")
-    
+        print("\n=== Step 3: Validate Job Status ===")
+        software_page.validate_job_status()
+        
 
 

@@ -29,7 +29,7 @@ class SoftwareUpdatePageDeviceParallel:
 
     def add_software_update(self):
         upload_zone = self.wait.until(
-            EC.presence_of_element_located((By.XPATH, file_upload))
+            EC.presence_of_element_located(file_upload)
         )
        
         upload_zone.send_keys(os.path.abspath(os_path))
@@ -38,39 +38,52 @@ class SoftwareUpdatePageDeviceParallel:
         
         
         # Wait for the file to appear in the UI
-        self.wait.until(EC.presence_of_element_located((By.XPATH, '//strong[contains(text(), "overview1.txt")]')))
+        self.wait.until(EC.presence_of_element_located(file_appeared))
         print("File confirmed in upload area")
 
         WebDriverWait(self.driver,5).until(
-            EC.element_to_be_clickable((By.ID,'nextStep1'))
+            EC.element_to_be_clickable(su_next_btn1)
         ).click()
 
         time.sleep(5)
         
         WebDriverWait(self.driver,5).until(
-            EC.element_to_be_clickable((By.ID,device_selection))
+            EC.element_to_be_clickable(device_selection)
         ).click()
 
-        install_button = Select(self.driver.find_element(By.ID,instalation_type))
+        install_button = Select(self.driver.find_element(*instalation_type))
         install_button.select_by_value("Parallel")
 
-        WebDriverWait(self.driver,5).until(EC.element_to_be_clickable((By.ID,'nextStep2'))).click()
+        WebDriverWait(self.driver,5).until(EC.element_to_be_clickable(su_next_btn2)).click()
 
-        self.driver.find_element(By.ID,"jobName").send_keys(job_name)
+        # enter a job name (use variable from helpers.variables)
+        self.driver.find_element(*su_job_name).send_keys(software_update_job_name)
 
-        self.driver.find_element(By.XPATH,'(//*[text()="Run now"])[1]').click()
+        self.driver.find_element(*run_now).click()
 
-        self.driver.find_element(By.ID,"startJob").click()
+        self.driver.find_element(*srt_job).click()
 
 
         self.driver.save_screenshot(screen_path)
 
-        print("Software update job created successfully with parallel installation type and RUN NOW option")
+    def validate_job_status(self):
+        wait = WebDriverWait(self.driver, 10)
+        jb_n=wait.until(EC.presence_of_element_located(job_name)).text
+        print("job_name is :: ",jb_n)
+        
+        jb_s=wait.until(EC.presence_of_element_located(job_status)).text
+        assert jb_s == expected_job_status, f"job status was not matching expected '{expected_job_status}'"
 
-# inst_login = LoginPage(webdriver.Chrome())
-# inst_login.open()   
-# inst_login.login()
+        rn_s=wait.until(EC.presence_of_element_located(run_status)).text
+        assert rn_s == expected_run_status, f"run status was not matching expected '{expected_run_status}'"
 
-# inst_software_update = SoftwareUpdatePageDeviceParallel(inst_login.driver)
-# inst_software_update.navigate_to_software_update()
-# inst_software_update.add_software_update()
+        rn_t=wait.until(EC.presence_of_element_located(run_time)).text
+        print("run time was :: ", rn_t)
+
+        self.driver.quit()
+        print("software update page sucsusfully test complete")
+    
+
+print("Software update job created successfully with parallel installation type and RUN NOW option")
+
+

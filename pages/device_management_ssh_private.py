@@ -67,6 +67,21 @@ class DeviceManagementPage:
         time.sleep(0.5)
 
         print("Device added successfully")
+    
+    def validate_device_added(self):
+        name_el = self.wait.until(EC.visibility_of_element_located(device_name))
+        assert name_el.text == d_name 
+
+        ip_el = self.driver.find_element(*device_ip)
+        assert ip_el.text == d_ip
+
+        uname_el = self.driver.find_element(*user_name)
+        assert uname_el.text == d_uname
+
+        dtype_el = self.driver.find_element(*device_model)
+        assert dtype_el.text == d_type
+        time.sleep(1.5)
+
 
 
 
