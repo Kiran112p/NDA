@@ -1,6 +1,8 @@
+import pytest
 from pages import device_management_ssh_private
 from pages import validate_config_module
 
+@pytest.mark.regression
 class TestValidateConfig:
     def test_validate_config(self, driver):
         
