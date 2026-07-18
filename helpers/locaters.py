@@ -75,3 +75,12 @@ software_image = (By.ID, "detailImage")
 
 
 
+## validate config page locators
+validate_config = (By.XPATH,'//*[@href="#validate-config"]')
+device_config = (By.XPATH,'//*[@id="validateDevice"]')
+expected_hostname = (By.XPATH,'//*[@id="ruleExpectedHostname"]')
+run_validate_1 = (By.XPATH,'(//*[@class="fa-solid fa-play"])[2]')
+
+device_config_os = (By.XPATH,'//*[@id="validateOsDevice"]')
+device_os_version = (By.XPATH,'//*[@id="ruleExpectedOsVersion"]')
+run_validate_2 = (By.XPATH,'(//*[@class="fa-solid fa-play"])[3]')
