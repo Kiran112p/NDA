@@ -36,3 +36,8 @@ os_path=r"D:\resume\overview1.txt"
 
 ##job name for software update page
 software_update_job_name="routers_Parallel_Update"
+
+validate_config_screenshot_path = r"D:\NDA\reports\validate_config_screenshot.png"
+# ROUTER_NCS_540 (192.168.1.100)
+# ROUTER_NCS_540
+os_validation_screenshot_path = r"D:\NDA\reports\os_validation_screenshot.png"
