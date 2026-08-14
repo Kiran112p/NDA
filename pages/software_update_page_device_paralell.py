@@ -20,12 +20,15 @@ class SoftwareUpdatePageDeviceParallel:
     def __init__(self, driver):
         self.driver = driver
         self.wait = WebDriverWait(driver, 10)
+        
 
     def navigate_to_software_update(self):
+        print("naviagating to module ")
         software_update_icon = WebDriverWait(self.driver, 10).until(EC.element_to_be_clickable((By.XPATH, '//*[@href="#software-update"]')))
         software_update_icon.click()
         
         self.driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
+
 
     def add_software_update(self):
         upload_zone = self.wait.until(
